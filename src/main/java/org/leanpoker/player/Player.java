@@ -30,7 +30,9 @@ public class Player {
         }
 
         if (input.getCommunityCards().size() > 0) {
-            if (new RankingService().getRanking(allCards) >= 3) {
+            if (new RankingService().getRanking(allCards) >= 5) {
+                newBet = Math.max(minRequiredBet, Double.valueOf((double) ourPlayer.getStack() * Math.random()).intValue());
+            } else if (new RankingService().getRanking(allCards) >= 3) {
                 newBet = Math.max(minRequiredBet, Double.valueOf((double) ourPlayer.getStack() * 0.3 * Math.random()).intValue());
             } else if ((double) minRequiredBet / (double) ourPlayer.getBet() < 0.2) {
                 newBet = minRequiredBet;
