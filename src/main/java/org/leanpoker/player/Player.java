@@ -18,7 +18,7 @@ public class Player {
         int newBet = 0;
 
         if (new RankInitialHand(input).getRank() > 0) {
-            newBet = Math.max(input.getCurrentBuyIn() - ourPlayer.getBet(), Double.valueOf(Double.valueOf(ourPlayer.getStack()) * 0.8 * Math.random()).intValue());
+            newBet = Math.max(input.getCurrentBuyIn() - ourPlayer.getBet(), Double.valueOf(Double.valueOf(ourPlayer.getStack()) * 0.2 * Math.random()).intValue());
         }
 
         return newBet;
