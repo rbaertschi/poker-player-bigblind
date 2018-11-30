@@ -1,6 +1,8 @@
 package org.leanpoker.player.state;
 
 import javax.annotation.Generated;
+import javax.smartcardio.Card;
+
 import com.google.gson.annotations.SerializedName;
 
 @Generated("com.robohorse.robopojogenerator")
@@ -28,12 +30,22 @@ public class CardsItem{
 		return suit;
 	}
 
+	public CardsItem rank(String rank) {
+		this.rank = rank;
+		return this;
+	}
+
+	public CardsItem suit(String suit) {
+		this.suit = suit;
+		return this;
+	}
+
 	@Override
  	public String toString(){
-		return 
-			"CardsItem{" + 
-			"rank = '" + rank + '\'' + 
-			",suit = '" + suit + '\'' + 
+		return
+			"CardsItem{" +
+			"rank = '" + rank + '\'' +
+			",suit = '" + suit + '\'' +
 			"}";
 		}
 }

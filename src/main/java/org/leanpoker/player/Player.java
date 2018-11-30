@@ -2,9 +2,12 @@ package org.leanpoker.player;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import org.leanpoker.player.state.CardsItem;
 import org.leanpoker.player.state.PlayersItem;
 import org.leanpoker.player.state.Request;
 import org.leanpoker.player.strategy.RankInitialHand;
+
+import java.util.ArrayList;
 
 public class Player {
     // test comment
@@ -17,9 +20,23 @@ public class Player {
 
         int newBet = 0;
 
+        ArrayList<CardsItem> allCards = new ArrayList<>();
+        allCards.addAll(ourPlayer.getHoleCards());
+        allCards.addAll(input.getCommunityCards());
+
+        int minRequiredBet = input.getCurrentBuyIn() - ourPlayer.getBet();
         if (new RankInitialHand(input).getRank() > 0) {
-            newBet = Math.max(input.getCurrentBuyIn() - ourPlayer.getBet(), Double.valueOf(Double.valueOf(ourPlayer.getStack()) * 0.2 * Math.random()).intValue());
+            newBet = Math.max(minRequiredBet, Double.valueOf((double) ourPlayer.getStack() * 0.2 * Math.random()).intValue());
         }
+
+        if (input.getCommunityCards().size() > 0) {
+            if (new RankingService().getRanking(allCards) >= 3) {
+                newBet = Math.max(minRequiredBet, Double.valueOf((double) ourPlayer.getStack() * 0.3 * Math.random()).intValue());
+            } else if ((double) minRequiredBet / (double) ourPlayer.getBet() < 0.2) {
+                newBet = minRequiredBet;
+            }
+        }
+
 
         return newBet;
     }
