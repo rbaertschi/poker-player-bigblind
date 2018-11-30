@@ -14,15 +14,17 @@ public class Player {
         Request     input     = new Gson().fromJson(request, Request.class);
         PlayersItem ourPlayer = input.getPlayers().get(input.getInAction());
 
-        int newBet = input.getCurrentBuyIn() - ourPlayer.getBet();
+        int newBet = 0;
 
-        newBet = input.getCurrentBuyIn() < (ourPlayer.getStack() / 4) ? newBet : 0;
-
-        if ("A".equals(ourPlayer.getHoleCards().get(0).getRank()) && "A".equals(ourPlayer.getHoleCards().get(1).getRank())) {
+        if (isPair(ourPlayer)) {
             newBet = ourPlayer.getStack();
         }
 
         return newBet;
+    }
+
+    private static boolean isPair(PlayersItem ourPlayer) {
+        return ourPlayer.getHoleCards().get(0).getRank().equals(ourPlayer.getHoleCards().get(1).getRank());
     }
 
     public static void showdown(JsonElement game) {
