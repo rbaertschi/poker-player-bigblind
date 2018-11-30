@@ -26,7 +26,7 @@ public class Player {
 
         int minRequiredBet = input.getCurrentBuyIn() - ourPlayer.getBet();
         if (new RankInitialHand(input).getRank() > 0) {
-            newBet = Math.max(minRequiredBet, Double.valueOf((double) ourPlayer.getStack() * 0.2 * Math.random()).intValue());
+            newBet = Math.max(minRequiredBet, Double.valueOf((double) ourPlayer.getStack() * 0.3 * Math.random()).intValue());
         }
 
         if (input.getCommunityCards().size() > 0) {
