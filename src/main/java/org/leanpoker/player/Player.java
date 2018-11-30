@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import org.leanpoker.player.state.PlayersItem;
 import org.leanpoker.player.state.Request;
+import org.leanpoker.player.strategy.RankInitialHand;
 
 public class Player {
     // test comment
@@ -16,7 +17,7 @@ public class Player {
 
         int newBet = 0;
 
-        if (isPair(ourPlayer)) {
+        if (new RankInitialHand(input).getRank() > 0) {
             newBet = ourPlayer.getStack();
         }
 
