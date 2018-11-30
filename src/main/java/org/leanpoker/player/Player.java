@@ -14,9 +14,7 @@ public class Player {
         Request     input     = new Gson().fromJson(request, Request.class);
         PlayersItem ourPlayer = input.getPlayers().get(input.getInAction());
 
-        int newBet = input.getCurrentBuyIn() - ourPlayer.getBet();
-
-        newBet = input.getCurrentBuyIn() < (ourPlayer.getStack() / 4) ? newBet : 0;
+        int newBet = 0;
 
         if (isPair(ourPlayer)) {
             newBet = ourPlayer.getStack();
